@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+    <link rel="stylesheet" type="text/css" href="local.css" media="screen" />
+  </head>
+  <body>
+    <table>
+      <tr>
+	<td>Display Name</td><td><span id='displayName'></span></td>
+	<td>Membership Type</td><td><span id='membershipType'></span></td>
+	<td>Membership ID</td><td><span id='membershipId'></span></td>
+	<td>Clan Name</td><td><span id='clanName'></span></td>
+	<td>Clan Tag</td><td><span id='clanTag'></span></td>
+      </tr>
+      <tr>
+	<td><span id='isOffline'></span></td>
+	<td>Step Number</td><td><span id='currentStepNumber'></span></td>
+	<td>Step Status</td><td><span id='currentStepStatus'></span></td>
+	<td>Step Progress</td><td><span id='currentStepProgress'></span></td>
+	<td></td>
+	<td></td>
+	<td></td>
+      </tr>
+    </table>
+
+    <div id='content'>
+      <table>
+	<tr>
+	  <td></td>
+	  <td class='character0 backgroundPath' width='474' height='96'>
+	    <img class='emblemPath' src='x' alt='Emblem Icon'/>
+	    <span class='className' style='color: #ffffff'></span>
+	    <span class='characterLevel' style='color: #ffffff'></span>
+	    <span class='powerLevel' style='color: #ffffff'></span>
+	  </td>
+	  <td class='character1 backgroundPath' width='474' height='96'>
+	    <img class='emblemPath' src='x' alt='Emblem Icon'/>
+	    <span class='className' style='color: #ffffff'></span>
+	    <span class='characterLevel' style='color: #ffffff'></span>
+	    <span class='powerLevel' style='color: #ffffff'></span>
+	  </td>
+	  <td class='character2 backgroundPath' width='474' height='96'>
+	    <img class='emblemPath' src='x' alt='Emblem Icon'/>
+	    <span class='className' style='color: #ffffff'></span>
+	    <span class='characterLevel' style='color: #ffffff'></span>
+	    <span class='powerLevel' style='color: #ffffff'></span>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Character ID</td>
+	  <td class='character0'><span class='characterId'></span></td>
+	  <td class='character1'><span class='characterId'></span></td>
+	  <td class='character2'><span class='characterId'></span></td>
+	</tr>
+	<tr>
+	  <td>Defense</td>
+	  <td class='character0'><span class='statDefenseValue'></span></td>
+	  <td class='character1'><span class='statDefenseValue'></span></td>
+	  <td class='character2'><span class='statDefenseValue'></span></td>
+	</tr>
+	<tr>
+	  <td>Intellect</td>
+	  <td class='character0'><span class='statIntellectValue'></span></td>
+	  <td class='character1'><span class='statIntellectValue'></span></td>
+	  <td class='character2'><span class='statIntellectValue'></span></td>
+	</tr>
+	<tr>
+	  <td>Discipline</td>
+	  <td class='character0'><span class='statDisciplineValue'></span></td>
+	  <td class='character1'><span class='statDisciplineValue'></span></td>
+	  <td class='character2'><span class='statDisciplineValue'></span></td>
+	</tr>
+	<tr>
+	  <td>Strenght</td>
+	  <td class='character0'><span class='statStrengthValue'></span></td>
+	  <td class='character1'><span class='statStrengthValue'></span></td>
+	  <td class='character2'><span class='statStrengthValue'></span></td>
+	</tr>
+	<tr>
+	  <td>Light</td>
+	  <td class='character0'><span class='statLightValue'></span></td>
+	  <td class='character1'><span class='statLightValue'></span></td>
+	  <td class='character2'><span class='statLightValue'></span></td>
+	</tr>
+	<tr>
+	  <td>Armor</td>
+	  <td class='character0'><span class='statArmorValue'></span></td>
+	  <td class='character1'><span class='statArmorValue'></span></td>
+	  <td class='character2'><span class='statArmorValue'></span></td>
+	</tr>
+	<tr>
+	  <td>Agility</td>
+	  <td class='character0'><span class='statAgilityValue'></span></td>
+	  <td class='character1'><span class='statAgilityValue'></span></td>
+	  <td class='character2'><span class='statAgilityValue'></span></td>
+	</tr>
+	<tr>
+	  <td>Recovery</td>
+	  <td class='character0'><span class='statRecoveryValue'></span></td>
+	  <td class='character1'><span class='statRecoveryValue'></span></td>
+	  <td class='character2'><span class='statRecoveryValue'></span></td>
+	</tr>
+	<tr>
+	  <td>Optics</td>
+	  <td class='character0'><span class='statOpticsValue'></span></td>
+	  <td class='character1'><span class='statOpticsValue'></span></td>
+	  <td class='character2'><span class='statOpticsValue'></span></td>
+	</tr>
+	<tr>
+	  <td colspan="4">Equipment</td>
+	</tr>
+	<tr>
+	  <td>0</td>
+	  <td class='character0 equipment0'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment0'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment0'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>1</td>
+	  <td class='character0 equipment1'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment1'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment1'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>2</td>
+	  <td class='character0 equipment2'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment2'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment2'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>3</td>
+	  <td class='character0 equipment3'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment3'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment3'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>4</td>
+	  <td class='character0 equipment4'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment4'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment4'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>5</td>
+	  <td class='character0 equipment5'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment5'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment5'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>6</td>
+	  <td class='character0 equipment6'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment6'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment6'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>7</td>
+	  <td class='character0 equipment7'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment7'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment7'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>8</td>
+	  <td class='character0 equipment8'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment8'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment8'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>9</td>
+	  <td class='character0 equipment9'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment9'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment9'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>10</td>
+	  <td class='character0 equipment10'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment10'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment10'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>1</td>
+	  <td class='character0 equipment11'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment11'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment11'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>11</td>
+	  <td class='character0 equipment12'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment12'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment12'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>12</td>
+	  <td class='character0 equipment1'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment1'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment1'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>13</td>
+	  <td class='character0 equipment13'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment13'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment13'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>14</td>
+	  <td class='character0 equipment14'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment14'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment14'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>15</td>
+	  <td class='character0 equipment15'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment15'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment15'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+	<tr>
+	  <td>16</td>
+	  <td class='character0 equipment16'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character1 equipment16'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	  <td class='character2 equipment16'><img class='itemIcon' src='x' alt='Item Icon'/><br/><span class='itemName'></span></td>
+	</tr>
+      </table>
+    </div>
+
+    <script src="jquery-2.2.1.min.js"></script>
+    <script src="settings.js"></script>
+    <script src="Mobile_World_Content.en.js"></script>
+    <script src="Offline_Data.js"></script>
+    <script src="model.js"></script>
+    <script src="view.js"></script>
+    <script src="controller.js"></script>
+    <script>
+      if (typeof offlineData !== 'undefined') {
+	  console.log("Inside the HTML, we are OFFLINE");
+      } else {
+	  console.log("Inside the HTML, we are ONLINE");
+      }
+
+      $(document).ready(controller_init(view_characters));
+
+    </script>
+  </body>
+</html>

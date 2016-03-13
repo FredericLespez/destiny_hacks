@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+    <link rel="stylesheet" type="text/css" href="local.css" media="screen" />
+  </head>
+  <body>
+    <table>
+      <tr>
+	<td>Display Name</td><td><span id='displayName'></span></td>
+	<td>Membership Type</td><td><span id='membershipType'></span></td>
+	<td>Membership ID</td><td><span id='membershipId'></span></td>
+	<td>Clan Name</td><td><span id='clanName'></span></td>
+	<td>Clan Tag</td><td><span id='clanTag'></span></td>
+      </tr>
+      <tr>
+	<td><span id='isOffline'></span></td>
+	<td>Step Number</td><td><span id='currentStepNumber'></span></td>
+	<td>Step Status</td><td><span id='currentStepStatus'></span></td>
+	<td>Step Progress</td><td><span id='currentStepProgress'></span></td>
+	<td></td>
+	<td></td>
+	<td></td>
+       </tr>
+    </table>
+
+    <div id='content'></div>
+
+    <script src="jquery-2.2.1.min.js"></script>
+    <!-- <script src="sorttable.js"></script> -->
+    <script src="jquery.tablesorter.min.js"></script>
+    <script src="settings.js"></script>
+    <script src="Mobile_World_Content.en.js"></script>
+    <script src="Offline_Data.js"></script>
+    <script src="model.js"></script>
+    <script src="view.js"></script>
+    <script src="controller.js"></script>
+    <script>
+      if (typeof offlineData !== 'undefined') {
+	  console.log("Inside the HTML, we are OFFLINE");
+      } else {
+	  console.log("Inside the HTML, we are ONLINE");
+      }
+
+      $(document).ready(controller_init(view_inventory));
+
+    </script>
+  </body>
+</html>

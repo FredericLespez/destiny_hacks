@@ -1,0 +1,54 @@
+#content {
+    color: white;
+    background-color: black;
+    width: 3500px;
+}
+
+#content table {
+    width: auto;
+    border-collapse: collapse;
+    border: 1px solid white;
+}
+
+#content table td {
+    width: auto;
+    border: 1px solid white;
+    text-align: center;
+}
+
+#content table td progress {
+    width: 50px;
+    height: 5px;
+}
+
+#content table th {
+    width: auto;
+    border: 1px solid white;
+    text-align: center;
+}
+
+#content img {
+    width: 50px;
+    height: 50px;
+}
+
+#content table td.GridComplete {
+    background-color: yellow;
+    color: black;
+}
+
+#content .damageArc {
+    color: #85c5ec;
+}
+
+#content .damageSolar {
+    color: #f2721b;
+}
+
+#content .damageVoid {
+    color: #b184c5;
+}
+
+#content .damageKinetic {
+    color: white;
+}

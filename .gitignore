@@ -1,0 +1,8 @@
+settings.js
+Mobile_World_Content.*.js
+Mobile_World_Content.*.sqlite
+Mobile_World_Content.*.sqlite.zip
+bootstrap_settings.json
+bungie_auth_cookies.json
+destiny_manifest_version.txt
+Offline_Data.js

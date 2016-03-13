@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+    <link rel="stylesheet" type="text/css" href="local.css" media="screen" />
+  </head>
+  <body>
+    <script src="jquery-2.2.1.min.js"></script>
+    <script src="settings.js"></script>
+    <script>
+
+      $( document ).ready(function() {
+
+      const displayName = settings.displayName;
+      const membershipType = settings.membershipType;
+      const ignoreCase = settings.ignoreCase;
+
+      $.ajax({
+      type: 'GET',
+      // GetVault
+      //url: "http://localhost:9000/Platform/Destiny/2/MyAccount/Vault/?accountId=4611686018455025728",
+      // GetAccountSummary
+      //url: "http://localhost:9000/Platform/Destiny/2/Account/4611686018455025728/Summary/",
+      // GetAllItemsSummary
+      //url: "http://localhost:9000/Platform/Destiny/2/Account/4611686018455025728/Items/",
+      // GetItemDetail Suros Regime 290 KINETIC
+      //url: "http://localhost:9000/Platform/Destiny/2/Account/4611686018455025728/Character/2305843009352174065/Inventory/6917529079345795665/",
+      // GetItemDetail Panta Rhei 279 ARC
+      //url: "http://localhost:9000/Platform/Destiny/2/Account/4611686018455025728/Character/2305843009352174065/Inventory/6917529080486813955/",
+      // GetItemDetail Conspiracy Theory-D 300 ARC
+      url: "http://localhost:9000/Platform/Destiny/2/Account/4611686018455025728/Character/2305843009352174065/Inventory/6917529078783057615/",
+      dataType: 'json',
+      }).done(function(json) {
+      $( "#response" ).html(JSON.stringify(json, null, 4));
+      });
+
+      });
+    </script>
+
+    <pre><span id='response'></span></pre>
+  </body>
+</html>
