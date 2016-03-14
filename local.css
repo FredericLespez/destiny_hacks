@@ -17,8 +17,6 @@
 }
 
 #content table td progress {
-    width: 50px;
-    height: 5px;
 }
 
 #content table th {
@@ -37,18 +35,66 @@
     color: black;
 }
 
-#content .damageArc {
+#content table td.itemIcon img {
+    float: left;
+}
+
+#content table td.itemIcon progress {
+    width: 50px;
+    height: 5px;
+    float: left;
+    clear: both;
+}
+
+#content table td.talent talentLine1 {
+    float: left;
+}
+
+#content table td.talent talentLine2 {
+    float: left;
+    clear: both;
+}
+
+#content table td.talent talentLine3 {
+    float: left;
+    clear: both;
+}
+
+#content table td.talent img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40px;
+    height: 40px;
+}
+
+#content table td.talent span {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 75%;
+}
+
+#content table td.talent progress {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50px;
+    height: 5px;
+}
+
+#content table td.damageArc {
     color: #85c5ec;
 }
 
-#content .damageSolar {
+#content table td.damageSolar {
     color: #f2721b;
 }
 
-#content .damageVoid {
+#content table td.damageVoid {
     color: #b184c5;
 }
 
-#content .damageKinetic {
+#content table td.damageKinetic {
     color: white;
 }

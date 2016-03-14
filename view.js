@@ -404,8 +404,7 @@ function view_inventory(model) {
 			.append($('<th>').text('Bearer'))
 			.append($('<th>').text('Icon'))
 			.append($('<th>').text('Name'))
-			.append($('<th>').text('Light'))
-			.append($('<th>').text('Maxed ?'));
+			.append($('<th>').text('Light'));
 
 		    // Stats
 		    if (itemType === 2) { // Armor
@@ -575,11 +574,17 @@ function view_inventory(model) {
 		src: "https://www.bungie.net" + item.characterEmblemIcon,
 		alt: "CharacterEmblemIcon"
 	    })));
-	    row.append($('<td>').append($('<img/>', {
-		src: "https://www.bungie.net" + item.icon,
-		alt: "ItemIcon",
-		title: item.instanceId + '/' + item.hash
-	    })));
+	    row.append($('<td>')
+		       .addClass('itemIcon')
+		       .append($('<img/>', {
+			   src: "https://www.bungie.net" + item.icon,
+			   alt: "ItemIcon",
+			   title: item.instanceId + '/' + item.hash
+		       }))
+		       .append('<br>' + '<progress value="' + (item.isGridComplete ? 100 : 0) + '" max="100">'
+			       + (item.isGridComplete ? 100 : 0) + '</progress>'
+			      )
+		      );
 	    row.append($('<td>').text(item.name));
 	    //row.append($('<td>').text(item.typeName));
 	    if ('primaryStat' in itemSummary) {
@@ -600,19 +605,6 @@ function view_inventory(model) {
 			       .addClass('damageKinetic')
 			       .text(item.primaryStatValue));
 		}
-	    }
-	    // if (item.damageTypeHash !== 0 && item.damageTypeShowIcon) {
-	    // 	row.append($('<td>').append($('<img/>', {
-	    // 	    src: "https://www.bungie.net" + item.damageTypeIcon,
-	    // 	    alt: "DamageTypeIcon"
-	    // 	})));
-	    // } else {
-	    // 	row.append($('<td>').text('None'));
-	    // }
-	    if (item.isGridComplete) {
-		row.append($('<td>').text(item.isGridComplete).addClass('GridComplete'));
-	    } else {
-		row.append($('<td>').text(item.isGridComplete).addClass('GridNotComplete'));
 	    }
 
 	    if (item.type === 2) { // Armor
@@ -660,26 +652,31 @@ function view_inventory(model) {
 	    for (talentCol = 0; talentCol < talentGridMaxRowByCol[item.type][item.subType].length; talentCol++) {
 		for (talentRow = 0; talentRow < talentGridMaxRowByCol[item.type][item.subType][talentCol]+1; talentRow++) {
 		    if (item.talentGrid[talentCol] === undefined) {
-			row.append($('<td>'));
+			row.append($('<td>')).addClass('talent');
 			continue;
 		    }
 		    const talent = item.talentGrid[talentCol][talentRow];
 		    if (talent === undefined) {
-			row.append($('<td>'));
+			row.append($('<td>')).addClass('talent');
 		    } else {
 			var talentProgressPercent = Math.floor(talent.progressPercent);
-			row.append($('<td>')
-				   .append($('<img/>', {
-				       src: "https://www.bungie.net" + talent.icon,
-				       alt: "Icon for " + talent.name,
-				       title: talent.description
-				   }))
-				   .append('<br>' + talent.name
-					   //+ <br>' + talent.node
-					   //+ '<br>' + talent.isActivated
-					   + '<br>' + '<progress value="'+ talentProgressPercent + '" max="100">' + talentProgressPercent + '</progress>'
-					   //+ '<br>' + (talentCol+1) + ' / ' + (talentRow+1)
-					  )
+			row.append($('<td>').addClass('talent')
+				   .append($('<div>')
+					   .addClass('talentLine1')
+					   .append($('<img/>', {
+					       src: "https://www.bungie.net" + talent.icon,
+					       alt: "Icon for " + talent.name,
+					       title: talent.description
+					   })))
+				   .append($('<div>')
+					   .addClass('talentLine2')
+					   .append($('<span>').text(talent.name)))
+				   .append($('<div>')
+					   .addClass('talentLine3')
+					   .append($('<progress>', {
+					       value: talentProgressPercent,
+					       max: 100
+					   }).text(talentProgressPercent)))
 				  );
 		    }
 		}
