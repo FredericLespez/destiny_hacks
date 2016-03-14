@@ -104,7 +104,8 @@ function view_item(model) {
 	// const itemId = "6917529082077118204"; // Armor
 	// const itemId = "6917529077502486504"; // Weapon Choleric Dragon SRT-49
 	// const itemId = "6917529077482249852"; // Weapon Void Edge
-	const itemId = "6917529081948154111"; // Weapon Telesto
+	//const itemId = "6917529081948154111"; // Weapon Telesto
+	const itemId = "6917529081948151933"; // Armor exotic Achlyophage Symbiote
 	const itemDetail = model.getItemDetail[itemId];
 	const itemFull = itemDetail.item;
 	const item = {};
@@ -139,6 +140,8 @@ function view_item(model) {
 	    item.primaryStatName = (DestinyMWC.DestinyStatDefinition[item.primaryStatHash]).statName;
 	    item.primaryStatIcon = (DestinyMWC.DestinyStatDefinition[item.primaryStatHash]).icon;
 	}
+
+	item.fullJson = JSON.stringify(itemFull, null, 4);
 
 	// Getting Stats
 	for (i = 0; i < itemFull.stats.length; i++) {
@@ -569,6 +572,10 @@ function view_inventory(model) {
 	    }
 
 	    // Create row to insert
+	    if (item.type === 2) { // Armor
+		// Fix item subtype for armor items
+		item.subType = armorSubTypeFromBucketType[item.bucketTypeHash];
+	    }
 	    const row = $('<tr>').attr('id', item.instanceId);
 	    row.append($('<td>').append($('<img/>', {
 		src: "https://www.bungie.net" + item.characterEmblemIcon,
@@ -685,9 +692,6 @@ function view_inventory(model) {
 	    //row.append($('<td>').text(item.summaryJson));
 
 	    // Insert a row in the right table
-	    if (item.type === 2) { // Armor
-		item.subType = armorSubTypeFromBucketType[item.bucketTypeHash];
-	    }
 	    const tableClass = tableClassAndLabel[item.type][item.subType].class;
 	    $('#content #' + tableClass + ' tbody').append(row);
 	}
