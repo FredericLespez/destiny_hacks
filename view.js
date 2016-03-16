@@ -142,6 +142,7 @@ function view_item(model) {
 	}
 
 	item.fullJson = JSON.stringify(itemFull, null, 4);
+	item.itemJson = JSON.stringify((DestinyMWC.DestinyInventoryItemDefinition[item.hash]), null, 4);
 
 	// Getting Stats
 	for (i = 0; i < itemFull.stats.length; i++) {
@@ -241,6 +242,7 @@ function view_inventory(model) {
 	// We can also use:
 	// const character = model.getAccountSummary.characters;
 	const character = model.getAllItemsSummary.characters;
+	const mwcClass = DestinyMWC.DestinyClassDefinition;
 	const mwcInventoryItem = DestinyMWC.DestinyInventoryItemDefinition;
 	const mwcInventoryBucket = DestinyMWC.DestinyInventoryBucketDefinition;
 	const mwcStat = DestinyMWC.DestinyStatDefinition;
@@ -281,6 +283,12 @@ function view_inventory(model) {
 	    10, // Heavy:   Rocket Launcher
 	    18 // Heavy:   Sword
 	];
+
+	const classType2Hash = {};
+	for (var classHash in mwcClass) {
+	    classType2Hash[(mwcClass[classHash]).classType] = classHash;
+	}
+	console.log(classType2Hash);
 
 	// Getting info needed to size the number of columns
 	// for each item type (autorifle, leg armor, etc.)
@@ -407,7 +415,8 @@ function view_inventory(model) {
 			.append($('<th>').text('Bearer'))
 			.append($('<th>').text('Icon'))
 			.append($('<th>').text('Name'))
-			.append($('<th>').text('Light'));
+			.append($('<th>').text('Light'))
+			.append($('<th>').text('Class'));
 
 		    // Stats
 		    if (itemType === 2) { // Armor
@@ -490,6 +499,7 @@ function view_inventory(model) {
 	    const itemDetail = model.getItemDetail[item.instanceId];
 	    item.type = (mwcInventoryItem[item.hash]).itemType;
 	    item.subType = (mwcInventoryItem[item.hash]).itemSubType;
+	    item.classType = (mwcInventoryItem[item.hash]).classType;
 	    item.typeName = (mwcInventoryItem[item.hash]).itemTypeName;
 	    item.icon = (mwcInventoryItem[item.hash]).icon;
 	    item.name = (mwcInventoryItem[item.hash]).itemName;
@@ -614,6 +624,15 @@ function view_inventory(model) {
 		}
 	    }
 
+	    if (item.classType === 3) {
+		row.append($('<td>').text('Any'));
+	    } else {
+		console.log(item.classType);
+		const classHash = classType2Hash[item.classType];
+		console.log(classHash);
+		console.log(mwcClass[classHash]);
+		row.append($('<td>').text((mwcClass[classHash]).className));
+	    }
 	    if (item.type === 2) { // Armor
 		row
 		    .append($('<td>').text(item.stats["144602215"]))   // Intellect
