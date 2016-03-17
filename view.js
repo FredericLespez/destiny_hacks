@@ -722,7 +722,10 @@ function view_inventory(model) {
 		const itemSubType = SubTypeList[j];
 		const tableClass = tableClassAndLabel[itemType][itemSubType].class;
 		const tableLabel = tableClassAndLabel[itemType][itemSubType].label;
-		$('#content #' + tableClass).tablesorter();
+		$('#content #' + tableClass).tablesorter({
+		    // sort on the first column and third column, order asc
+		    sortList: [[2,0]]
+		});
 	    }
 	}
     }
