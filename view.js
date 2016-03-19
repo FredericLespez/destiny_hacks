@@ -205,32 +205,6 @@ function view_item(model) {
 }
 
 function view_inventory(model) {
-    const bucketToIgnoreList = [
-	// "3448274439", // Helmet
-	// "3551918588", // Gauntlets
-	// "14239492",   // Chest Armor
-	// "20886954",   // Leg Armor
-	// "1585787867", // Class Armor
-	// "434908299",  // Artifacts
-	// "1498876634", // Primary Weapons
-	// "2465295065", // Special Weapons
-	// "953998645",  // Heavy Weapons
-	// "4023194814", // Ghost
-	"1801258597", // Quest
-	"3284755031", // Subclass
-	"2025709351", // Vehicle
-	"3796357825", // Sparrow Horn
-	"284967655",  // Ships
-	"2973005342", // Shaders
-	"4274335291", // Emblems
-	"3054419239", // Emotes
-	"3865314626", // Materials
-	"1469714392", // Consumables
-	"375726501",  // Mission
-	"2197472680", // Bounties
-	"2689798308", // Glimmer
-	"2689798304", // Legendary Marks
-    ];
     var i;
     var j;
 
@@ -335,7 +309,7 @@ function view_inventory(model) {
 	    }
 
 	    // Ignore everything except armor and weapon items
-	    if ((item.type === 2) && (item.type === 3)) {
+	    if ((item.type !== 2) && (item.type !== 3)) {
 	    	continue;
 	    }
 
@@ -480,7 +454,6 @@ function view_inventory(model) {
 				    .attr('colspan', talentGridSize[t]+1)
 				   );
 		    }
-		    $('#content #' + tableClass).append($('<tbody>'));
 
 		    // Perks
 		    $('#content #' + tableClass + ' thead tr' )
@@ -488,6 +461,8 @@ function view_inventory(model) {
 				.text('Perks')
 				.attr('colspan', perksSize[itemType][itemSubType])
 			       );
+
+		    // Add Table body
 		    $('#content #' + tableClass).append($('<tbody>'));
 		}
 	    }
@@ -507,8 +482,8 @@ function view_inventory(model) {
 	    if (model.bucketToIgnoreList.indexOf(String(item.bucketTypeHash)) > -1) {
 	    	continue;
 	    }
-	    // Ignore engrams and foundry orders
-	    if ((item.itemType === 8) || (item.itemType === 0)) {
+	    // Ignore everything except armor and weapon items
+	    if ((item.itemType !== 2) && (item.itemType !== 3)) {
 	    	continue;
 	    }
 	    // Ignore everything except exotic and legendary items

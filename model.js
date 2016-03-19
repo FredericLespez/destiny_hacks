@@ -225,8 +225,8 @@ function DestinyModel(displayName, membershipType, ignoreCase, callbackStatus) {
 	    	continue;
 	    }
 	    const characterIndex = (item.characterIndex === -1) ? 0 : item.characterIndex;
-	    // Ignore engrams and foundry orders
-	    if ((item.itemType === 8) || (item.itemType === 0)) {
+	    // Ignore everything except armor and weapon items
+	    if ((itemType !== 2) && (itemType !== 3)) {
 	    	continue;
 	    }
 	    // Ignore everything except exotic and legendary items
