@@ -4,6 +4,14 @@
     width: 3500px;
 }
 
+#content a:link {
+    color: white;
+}
+
+#content a:visited {
+    color: white;
+}
+
 #content table {
     width: auto;
     border-collapse: collapse;
