@@ -104,8 +104,9 @@ function view_item(model) {
 	// const itemId = "6917529082077118204"; // Armor
 	// const itemId = "6917529077502486504"; // Weapon Choleric Dragon SRT-49
 	// const itemId = "6917529077482249852"; // Weapon Void Edge
-	//const itemId = "6917529081948154111"; // Weapon Telesto
-	const itemId = "6917529081948151933"; // Armor exotic Achlyophage Symbiote
+	// const itemId = "6917529081948154111"; // Weapon Telesto
+	// const itemId = "6917529081948151933"; // Armor exotic Achlyophage Symbiote
+	const itemId = "6917529082563647587"; // Weapon SUROS DIS-47
 	const itemDetail = model.getItemDetail[itemId];
 	const itemFull = itemDetail.item;
 	const item = {};
@@ -141,8 +142,9 @@ function view_item(model) {
 	    item.primaryStatIcon = (DestinyMWC.DestinyStatDefinition[item.primaryStatHash]).icon;
 	}
 
-	item.fullJson = JSON.stringify(itemFull, null, 4);
-	item.itemJson = JSON.stringify((DestinyMWC.DestinyInventoryItemDefinition[item.hash]), null, 4);
+	item.itemFullJson = JSON.stringify(itemFull, null, 4);
+	item.mwcItemJson = JSON.stringify((DestinyMWC.DestinyInventoryItemDefinition[item.hash]), null, 4);
+	item.progressionJson = JSON.stringify((DestinyMWC.DestinyProgressionDefinition[item.progressionHash]), null, 4);
 
 	// Getting Stats
 	for (i = 0; i < itemFull.stats.length; i++) {
@@ -165,6 +167,7 @@ function view_item(model) {
 	// Getting talents
 	item.talentGrid = [];
 	item.talentGridHash = itemFull.talentGridHash;
+	item.talentGridJson = JSON.stringify((DestinyMWC.DestinyTalentGridDefinition[itemFull.talentGridHash]), null, 4);
 	const talentGrid = (DestinyMWC.DestinyTalentGridDefinition[itemFull.talentGridHash]);
 	const talentGridNodes = talentGrid.nodes;
 	const itemTalentNodes = itemDetail.talentNodes;
@@ -247,6 +250,7 @@ function view_inventory(model) {
 	const mwcInventoryBucket = DestinyMWC.DestinyInventoryBucketDefinition;
 	const mwcStat = DestinyMWC.DestinyStatDefinition;
 	const mwcDamageType = DestinyMWC.DestinyDamageTypeDefinition;
+	const mwcSandboxPerk = DestinyMWC.DestinySandboxPerkDefinition;
 	const mvcTalentGrid = DestinyMWC.DestinyTalentGridDefinition;
 	const itemTypeRefList = [
 	    3,  // Weapon
@@ -288,26 +292,29 @@ function view_inventory(model) {
 	for (var classHash in mwcClass) {
 	    classType2Hash[(mwcClass[classHash]).classType] = classHash;
 	}
-	console.log(classType2Hash);
 
 	// Getting info needed to size the number of columns
 	// for each item type (autorifle, leg armor, etc.)
 	var tableClassAndLabel = {};
-	var statSize = {};
+	var statsSize = {};
+	var perksSize = {};
 	var talentGridMaxRowByCol = {};
 	for (i = 0; i < itemTypeRefList.length; i++) {
 	    tableClassAndLabel[itemTypeRefList[i]] = {};
-	    statSize[itemTypeRefList[i]] = {};
+	    statsSize[itemTypeRefList[i]] = {};
+	    perksSize[itemTypeRefList[i]] = {};
 	    talentGridMaxRowByCol[itemTypeRefList[i]] = {};
 	};
 	for (i = 0; i < armorSubTypeRefList.length; i++) {
 	    tableClassAndLabel[2][armorSubTypeRefList[i]] = {};
-	    statSize[2][armorSubTypeRefList[i]] = 0;
+	    statsSize[2][armorSubTypeRefList[i]] = 0;
+	    perksSize[2][armorSubTypeRefList[i]] = 0;
 	    talentGridMaxRowByCol[2][armorSubTypeRefList[i]] = [];
 	};
 	for (i = 0; i < weaponSubTypeRefList.length; i++) {
 	    tableClassAndLabel[3][weaponSubTypeRefList[i]] = {};
-	    statSize[3][weaponSubTypeRefList[i]] = 0;
+	    statsSize[3][weaponSubTypeRefList[i]] = 0;
+	    perksSize[3][weaponSubTypeRefList[i]] = 0;
 	    talentGridMaxRowByCol[3][weaponSubTypeRefList[i]] = [];
 	};
 	for (i = 0; i < model.getAllItemsSummary.items.length; i++) {
@@ -356,8 +363,12 @@ function view_inventory(model) {
 	    tableClassAndLabel[item.type][item.subType].class = 'ItemType' + item.type + '_SubType'+ item.subType;
 
 	    // Getting stats size for each slot (primary, special, heavy, etc.)
-	    statSize[item.type][item.subType] = Math.max(statSize[item.type][item.subType],
+	    statsSize[item.type][item.subType] = Math.max(statsSize[item.type][item.subType],
 							 itemDetail.item.stats.length);
+
+	    // Getting perks size for each slot (primary, special, heavy, etc.)
+	    perksSize[item.type][item.subType] = Math.max(perksSize[item.type][item.subType],
+							 itemDetail.item.perks.length);
 
 	    // Getting talents grid size for each slot (primary, special, heavy, etc.)
 	    item.talentGridHash = itemDetail.item.talentGridHash;
@@ -390,6 +401,7 @@ function view_inventory(model) {
 	}
 	// console.log(tableClassAndLabel);
 	// console.log(statSize);
+	// console.log(perksSize);
 	// console.log(talentGridMaxRowByCol);
 
 	// Create table for each item type (autorifle, leg armor, etc.)
@@ -469,6 +481,14 @@ function view_inventory(model) {
 				   );
 		    }
 		    $('#content #' + tableClass).append($('<tbody>'));
+
+		    // Perks
+		    $('#content #' + tableClass + ' thead tr' )
+			.append($('<th>')
+				.text('Perks')
+				.attr('colspan', perksSize[itemType][itemSubType])
+			       );
+		    $('#content #' + tableClass).append($('<tbody>'));
 		}
 	    }
 	}
@@ -542,6 +562,17 @@ function view_inventory(model) {
 		item.stats[stats.statHash] = stats.value;
 	    }
 
+	    // Getting Perks
+	    item.perks = [];
+	    for (j = 0; j < itemDetail.item.perks.length; j++) {
+		const perks = itemDetail.item.perks[j];
+		item.perks[j] = {};
+		item.perks[j].name = (mwcSandboxPerk[perks.perkHash]).displayName;
+		item.perks[j].description = (mwcSandboxPerk[perks.perkHash]).displayDescription;
+		item.perks[j].icon = (mwcSandboxPerk[perks.perkHash]).displayIcon;
+		item.perks[j].isDisplayable = (mwcSandboxPerk[perks.perkHash]).isDisplayable;
+	    }
+
 	    // Getting talents
 	    item.talentGrid = [];
 	    item.talentGridHash = itemDetail.item.talentGridHash;
@@ -596,13 +627,17 @@ function view_inventory(model) {
 		       .append($('<img/>', {
 			   src: "https://www.bungie.net" + item.icon,
 			   alt: "ItemIcon",
-			   title: item.instanceId + '/' + item.hash
+			   title: 'Item ID: ' + item.instanceId
 		       }))
 		       .append('<br>' + '<progress value="' + (item.isGridComplete ? 100 : 0) + '" max="100">'
 			       + (item.isGridComplete ? 100 : 0) + '</progress>'
 			      )
 		      );
-	    row.append($('<td>').text(item.name));
+	    row.append($('<td>').append($('<a>')
+					.attr('href', 'https://www.bungie.net/en/Armory/Detail?item=' + item.hash)
+					.text(item.name)
+				       )
+		      );
 	    //row.append($('<td>').text(item.typeName));
 	    if ('primaryStat' in itemSummary) {
 		if (item.damageTypeHash === 3454344768) { // Void
@@ -627,10 +662,7 @@ function view_inventory(model) {
 	    if (item.classType === 3) {
 		row.append($('<td>').text('Any'));
 	    } else {
-		console.log(item.classType);
 		const classHash = classType2Hash[item.classType];
-		console.log(classHash);
-		console.log(mwcClass[classHash]);
 		row.append($('<td>').text((mwcClass[classHash]).className));
 	    }
 	    if (item.type === 2) { // Armor
@@ -708,7 +740,26 @@ function view_inventory(model) {
 		}
 	    }
 
-	    //row.append($('<td>').text(item.summaryJson));
+	    for (j = 0; j < perksSize[item.type][item.subType]; j++) {
+		if (item.perks[j] === undefined) {
+		    row.append($('<td>')).addClass('talent');
+		    continue;
+		} else {
+		    const perk = item.perks[j];
+		    row.append($('<td>').addClass('talent')
+			       .append($('<div>')
+				       .addClass('talentLine1')
+				       .append($('<img/>', {
+					   src: "https://www.bungie.net" + perk.icon,
+					   alt: "Icon for " + perk.name,
+					   title: perk.description
+				       })))
+			       .append($('<div>')
+				       .addClass('talentLine2')
+				       .append($('<span>').text(perk.name)))
+			      );
+		}
+	    }
 
 	    // Insert a row in the right table
 	    const tableClass = tableClassAndLabel[item.type][item.subType].class;
