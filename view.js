@@ -446,6 +446,13 @@ function view_inventory(model) {
 			}
 		    }
 
+		    // Perks
+		    $('#content #' + tableClass + ' thead tr' )
+			.append($('<th>')
+				.text('Perks')
+				.attr('colspan', perksSize[itemType][itemSubType])
+			       );
+
 		    // Talents
 		    for (var t = 0; t < talentGridSize.length; t++) {
 			$('#content #' + tableClass + ' thead tr' )
@@ -454,13 +461,6 @@ function view_inventory(model) {
 				    .attr('colspan', talentGridSize[t]+1)
 				   );
 		    }
-
-		    // Perks
-		    $('#content #' + tableClass + ' thead tr' )
-			.append($('<th>')
-				.text('Perks')
-				.attr('colspan', perksSize[itemType][itemSubType])
-			       );
 
 		    // Add Table body
 		    $('#content #' + tableClass).append($('<tbody>'));
@@ -681,6 +681,27 @@ function view_inventory(model) {
 		}
 	    }
 
+	    for (j = 0; j < perksSize[item.type][item.subType]; j++) {
+		if (item.perks[j] === undefined) {
+		    row.append($('<td>')).addClass('talent');
+		    continue;
+		} else {
+		    const perk = item.perks[j];
+		    row.append($('<td>').addClass('talent')
+			       .append($('<div>')
+				       .addClass('talentLine1')
+				       .append($('<img/>', {
+					   src: "https://www.bungie.net" + perk.icon,
+					   alt: "Icon for " + perk.name,
+					   title: perk.description
+				       })))
+			       .append($('<div>')
+				       .addClass('talentLine2')
+				       .append($('<span>').text(perk.name)))
+			      );
+		}
+	    }
+
 	    var talentCol, talentRow;
 	    for (talentCol = 0; talentCol < talentGridMaxRowByCol[item.type][item.subType].length; talentCol++) {
 		for (talentRow = 0; talentRow < talentGridMaxRowByCol[item.type][item.subType][talentCol]+1; talentRow++) {
@@ -712,27 +733,6 @@ function view_inventory(model) {
 					   }).text(talentProgressPercent)))
 				  );
 		    }
-		}
-	    }
-
-	    for (j = 0; j < perksSize[item.type][item.subType]; j++) {
-		if (item.perks[j] === undefined) {
-		    row.append($('<td>')).addClass('talent');
-		    continue;
-		} else {
-		    const perk = item.perks[j];
-		    row.append($('<td>').addClass('talent')
-			       .append($('<div>')
-				       .addClass('talentLine1')
-				       .append($('<img/>', {
-					   src: "https://www.bungie.net" + perk.icon,
-					   alt: "Icon for " + perk.name,
-					   title: perk.description
-				       })))
-			       .append($('<div>')
-				       .addClass('talentLine2')
-				       .append($('<span>').text(perk.name)))
-			      );
 		}
 	    }
 
